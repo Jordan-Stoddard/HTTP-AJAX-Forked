@@ -12,6 +12,7 @@ const NewFriendInputs = props => {
     }
   }
 
+  const {name, age, email, petName } = props.newFriendData
   return (
     <Fragment>
       <div className="inputDiv">
@@ -22,7 +23,7 @@ const NewFriendInputs = props => {
             required
             placeholder="Type your friend's name here..."
             name="name"
-            value={props.newFriendData.name}
+            value={name}
             onChange={props.changeHandler}
           />
 
@@ -31,7 +32,7 @@ const NewFriendInputs = props => {
             required
             placeholder="Type your friend's age here..."
             name="age"
-            value={props.newFriendData.age}
+            value={age}
             onChange={props.changeHandler}
           />
 
@@ -40,7 +41,16 @@ const NewFriendInputs = props => {
             required
             placeholder="Type your friend's e-mail here..."
             name="email"
-            value={props.newFriendData.email}
+            value={email}
+            onChange={props.changeHandler}
+          />
+
+            <input
+            type="text"
+            required
+            placeholder="Type your pet's name here..."
+            name="petName"
+            value={petName}
             onChange={props.changeHandler}
           />
           <div className="flexyDiv2">

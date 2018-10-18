@@ -87,6 +87,7 @@ updateFriend = () => {
   })
 }
 
+
 toggleFriendInfoForm = (ev, friend) => {
   ev.preventDefault();
   this.setState({
@@ -95,10 +96,6 @@ toggleFriendInfoForm = (ev, friend) => {
     editingId: friend.id
   })
 }
-
-
-
-
 
   render() {
     return (

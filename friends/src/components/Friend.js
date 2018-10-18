@@ -1,7 +1,7 @@
 import React from "react";
 
 const Friend = props => {
-  const { name, id, age, email } = props.friend;
+  const { name, id, age, email, petName } = props.friend;
   return (
     <div className="friendCard">
       <div className="flexyDiv">
@@ -17,6 +17,7 @@ const Friend = props => {
         <li>Name: {name}</li>
         <li>Age: {age}</li>
         <li>E-mail: {email}</li>
+        <li>Pet Name: {petName}</li>
       </ul>
 
       <div className="flexyDiv2">
