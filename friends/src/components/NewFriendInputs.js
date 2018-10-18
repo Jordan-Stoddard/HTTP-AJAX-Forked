@@ -3,10 +3,19 @@ import PropTypes from "prop-types";
 import { Fragment } from "react";
 
 const NewFriendInputs = props => {
+  const handleClick = ev => {
+    ev.preventDefault();
+    if (props.isEditing) {
+      props.updateFriend();
+    } else {
+      props.addNewFriend();
+    }
+  }
+
   return (
     <Fragment>
       <div className="inputDiv">
-        <h1>Add a New Friend:</h1>
+        <h1>{props.isEditing ? 'Edit Info:' : 'Add a New Friend:'}</h1>
         <form className="inputForm">
           <input
             type="text"
@@ -34,7 +43,10 @@ const NewFriendInputs = props => {
             value={props.newFriendData.email}
             onChange={props.changeHandler}
           />
-          <button onClick={props.addNewFriend}>Submit</button>
+          <div className="flexyDiv2">
+          <button className="otherButton1" onClick={handleClick}>{props.isEditing ? 'Edit Info' : 'Add Friend'}</button>
+          
+          </div>
         </form>
       </div>
     </Fragment>

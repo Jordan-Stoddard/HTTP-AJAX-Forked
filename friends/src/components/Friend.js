@@ -1,15 +1,17 @@
 import React from "react";
 
 const Friend = props => {
-    console.log(props)
-    const {name, id, age, email, deleteFriend} = props.friend
+  const { name, id, age, email } = props.friend;
   return (
     <div className="friendCard">
-      <div className="flexyDiv"> 
-      <h1>Friend's Contact Info</h1>
-      <button className="button" onClick={event => props.deleteFriend(event, id)}>
-        X
-      </button>
+      <div className="flexyDiv">
+        <h1>{`${name}'s Contact Info`}</h1>
+        <button
+          className="deleteButton"
+          onClick={event => props.deleteFriend(event, id)}
+        >
+          X
+        </button>
       </div>
       <ul>
         <li>Name: {name}</li>
@@ -17,7 +19,14 @@ const Friend = props => {
         <li>E-mail: {email}</li>
       </ul>
 
-
+      <div className="flexyDiv2">
+        <button 
+        className="otherButton2" 
+        onClick={ev => {props.toggleFriendInfoForm(ev, props.friend)}}
+        >
+          Edit Info
+        </button>
+      </div>
     </div>
   );
 };

@@ -5,6 +5,12 @@ import NewFriendInputs from './components/NewFriendInputs'
 
 import './App.css';
 
+const existingFriend = {
+  name: '',
+  age: '',
+  email: ''
+}
+
 class App extends Component {
   constructor() {
     super()
@@ -14,9 +20,13 @@ class App extends Component {
         name: '',
         age: '',
         email: ''
-      }
+      },
+      editingId: null,
+      isEditing: false,
     }
   }
+
+// Mount initial Data //
 
 componentDidMount() {
   axios
@@ -25,8 +35,10 @@ componentDidMount() {
   .catch(error => console.log(error))
 }
 
-addNewFriend = event => {
-  event.preventDefault();
+// Function that adds a new object into our server array. //
+
+addNewFriend = () => {
+  
   if (this.state.newFriend.name === '' || this.state.newFriend.age === '' || this.state.newFriend.email === '') {
     return null;
   }
@@ -41,11 +53,15 @@ addNewFriend = event => {
     }))
 }
 
+// Function that deletes a friend based on it's ID from our server array. //
+
 deleteFriend = (event, id) => {
   event.preventDefault();
   axios.delete(`http://localhost:5000/friends/${id}`)
   .then(response => this.setState({ friends: response.data }))
 }
+
+// onChange function that speads in our existing newFriend object and then updates the fields in the object based on the location and name. //
 
 changeHandler = event => {
 this.setState({
@@ -56,6 +72,32 @@ this.setState({
 })
 }
 
+// Function that changes an existing friend's information.
+
+updateFriend = () => {
+  axios
+  .put(`http://localhost:5000/friends/${this.state.editingId}`, this.state.newFriend)
+  .then(response => {
+    this.setState({
+      friends: response.data,
+      editingId: null,
+      isEditing: false,
+      newFriend: existingFriend,
+    })
+  })
+}
+
+toggleFriendInfoForm = (ev, friend) => {
+  ev.preventDefault();
+  this.setState({
+    newFriend: friend,
+    isEditing: true,
+    editingId: friend.id
+  })
+}
+
+
+
 
 
   render() {
@@ -64,11 +106,15 @@ this.setState({
         <NewFriendInputs 
         newFriendData={this.state.newFriend} 
         changeHandler={this.changeHandler} 
-        addNewFriend={this.addNewFriend} 
+        addNewFriend={this.addNewFriend}
+        editingId={this.state.editingId}
+        isEditing={this.state.isEditing}
+        updateFriend={this.updateFriend}
         />
         <FriendsList 
         data={this.state.friends}
         deleteFriend={this.deleteFriend}
+        toggleFriendInfoForm={this.toggleFriendInfoForm}
         />
       </div>
     );
