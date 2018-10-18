@@ -5,8 +5,12 @@ const FriendsList = props => {
     return (
         <div className="friendsListDiv" >
             {props.data.map(friend => {
+                console.log(friend)
                 return (
-                 <Friend friend={friend} key={friend.id}/>
+                 <Friend 
+                 friend={friend} 
+                 key={friend.id} 
+                 deleteFriend={props.deleteFriend} />
                 )
             })}
         </div>
