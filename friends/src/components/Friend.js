@@ -10,7 +10,7 @@ const Friend = props => {
           className="deleteButton"
           onClick={event => props.deleteFriend(event, id)}
         >
-          X
+          <p>X</p>
         </button>
       </div>
       <ul>
