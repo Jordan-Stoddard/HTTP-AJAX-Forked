@@ -1,18 +1,12 @@
 import React from 'react'
+import Friend from './Friend'
 
 const FriendsList = props => {
     return (
         <div className="friendsListDiv" >
-            {props.data.map(friends => {
+            {props.data.map(friend => {
                 return (
-                    <div className="friendCard" key={friends.id}>
-                    <h1>Friend's Contact Info</h1>
-                    <ul >
-                    <li>Name: {friends.name}</li>
-                    <li>Age: {friends.age}</li>
-                    <li>E-mail: {friends.email}</li>
-                    </ul>
-                    </div>
+                 <Friend friend={friend} key={friend.id}/>
                 )
             })}
         </div>

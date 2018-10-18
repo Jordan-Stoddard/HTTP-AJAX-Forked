@@ -10,7 +10,7 @@ class App extends Component {
     super()
     this.state = {
       friends: [],
-      newFriends: {
+      newFriend: {
         name: '',
         age: '',
         email: ''
@@ -27,14 +27,30 @@ componentDidMount() {
 
 addNewFriend = event => {
   event.preventDefault();
-    axios.post('http://localhost:5000/friends', this.state.newFriends)
-    .then(response => this.setState({ friends: response.data}))
+  if (this.state.newFriend.name === '' || this.state.newFriend.age === '' || this.state.newFriend.email === '') {
+    return null;
+  }
+    axios.post('http://localhost:5000/friends', this.state.newFriend)
+    .then(response => this.setState({ 
+      friends: response.data,
+      newFriend: {
+        name: '',
+        age: '',
+        email: ''
+      }
+    }))
+}
+
+deleteFriend = (event, id) => {
+  event.preventDefault();
+  axios.delete(`http://localhost:5000/friends/${id}`)
+  .then(response => this.setState({ friends: response.data }))
 }
 
 changeHandler = event => {
 this.setState({
-  newFriends: {
-    ...this.state.newFriends,
+  newFriend: {
+    ...this.state.newFriend,
     [event.target.name]: event.target.value,
   },
 })
@@ -46,11 +62,14 @@ this.setState({
     return (
       <div className="App">
         <NewFriendInputs 
-        newFriendData={this.state.newFriends} 
+        newFriendData={this.state.newFriend} 
         changeHandler={this.changeHandler} 
         addNewFriend={this.addNewFriend} 
         />
-        <FriendsList data={this.state.friends} />
+        <FriendsList 
+        data={this.state.friends}
+        deleteFriend={this.deleteFriend}
+        />
       </div>
     );
   }

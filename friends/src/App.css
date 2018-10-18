@@ -19,7 +19,11 @@
 }
 
 .App {
-  background-color: rgb(68, 76, 114);
+  background-image: url('./img/community-enjoying-facial-expression-936006.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 h1 {
